@@ -23,43 +23,43 @@ import java.util.concurrent.Callable;
  */
 public class TemplateUtils {
 
-    public static void stringNotEmptyAndThenExecute(String source, Runnable runnable) {
+  public static void stringNotEmptyAndThenExecute(String source, Runnable runnable) {
 
-        if (StringUtils.isNotEmpty(source)) {
+    if (org.apache.commons.lang3.StringUtils.isNotEmpty(source)) {
 
-            try {
-                runnable.run();
-            } catch (Exception e) {
-                LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
-            }
-        }
+      try {
+        runnable.run();
+      } catch (Exception e) {
+        LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
+      }
+    }
+  }
+
+  public static String stringEmptyAndThenExecute(String source, Callable<String> callable) {
+
+    if (org.apache.commons.lang3.StringUtils.isEmpty(source)) {
+
+      try {
+        return callable.call();
+      } catch (Exception e) {
+        LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
+      }
     }
 
-    public static String stringEmptyAndThenExecute(String source, Callable<String> callable) {
+    return source.trim();
+  }
 
-        if (StringUtils.isEmpty(source)) {
+  public static String stringBlankAndThenExecute(String source, Callable<String> callable) {
 
-            try {
-                return callable.call();
-            } catch (Exception e) {
-                LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
-            }
-        }
+    if (org.apache.commons.lang3.StringUtils.isBlank(source)) {
 
-        return source.trim();
+      try {
+        return callable.call();
+      } catch (Exception e) {
+        LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
+      }
     }
 
-    public static String stringBlankAndThenExecute(String source, Callable<String> callable) {
-
-        if (StringUtils.isBlank(source)) {
-
-            try {
-                return callable.call();
-            } catch (Exception e) {
-                LogUtils.NAMING_LOGGER.error("string empty and then execute cause an exception.", e);
-            }
-        }
-
-        return source.trim();
-    }
+    return source.trim();
+  }
 }

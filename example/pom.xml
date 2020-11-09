@@ -16,9 +16,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.alibaba.nacos</groupId>
+        <groupId>cn.aghost</groupId>
         <artifactId>nacos-all</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.1.aghost-fix.20201109</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -49,7 +49,7 @@
             <artifactId>nacos-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.alibaba.nacos</groupId>
+            <groupId>cn.aghost</groupId>
             <artifactId>nacos-client</artifactId>
         </dependency>
         <!-- log -->

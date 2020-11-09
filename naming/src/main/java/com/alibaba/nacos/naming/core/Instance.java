@@ -113,7 +113,7 @@ public class Instance extends com.alibaba.nacos.api.naming.pojo.Instance impleme
         int expectedGroupCount = 2;
 
         int port = 0;
-        if (NumberUtils.isNumber(matcher.group(expectedGroupCount))) {
+        if (NumberUtils.isCreatable(matcher.group(expectedGroupCount))) {
             port = Integer.parseInt(matcher.group(expectedGroupCount));
         }
 

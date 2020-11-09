@@ -16,9 +16,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>com.alibaba.nacos</groupId>
+        <groupId>cn.aghost</groupId>
         <artifactId>nacos-all</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.1.aghost-fix.20201109</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
@@ -30,7 +30,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.nacos</groupId>
+            <groupId>cn.aghost</groupId>
             <artifactId>nacos-console</artifactId>
         </dependency>
     </dependencies>
@@ -39,7 +39,7 @@
             <id>release-config</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.alibaba.nacos</groupId>
+                    <groupId>cn.aghost</groupId>
                     <artifactId>nacos-config</artifactId>
                 </dependency>
             </dependencies>
@@ -71,7 +71,7 @@
             <id>release-naming</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.alibaba.nacos</groupId>
+                    <groupId>cn.aghost</groupId>
                     <artifactId>nacos-naming</artifactId>
                 </dependency>
             </dependencies>
@@ -105,6 +105,7 @@
                 <finalName>nacos-address</finalName>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <version>3.0.0</version>
                         <configuration>
@@ -129,7 +130,7 @@
             <id>release-client</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.alibaba.nacos</groupId>
+                    <groupId>cn.aghost</groupId>
                     <artifactId>nacos-client</artifactId>
                 </dependency>
             </dependencies>
@@ -161,7 +162,7 @@
             <id>release-core</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.alibaba.nacos</groupId>
+                    <groupId>cn.aghost</groupId>
                     <artifactId>nacos-core</artifactId>
                 </dependency>
             </dependencies>
@@ -193,13 +194,14 @@
             <id>release-nacos</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.alibaba.nacos</groupId>
+                    <groupId>cn.aghost</groupId>
                     <artifactId>nacos-console</artifactId>
                 </dependency>
             </dependencies>
             <build>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <version>3.0.0</version>
                         <configuration>

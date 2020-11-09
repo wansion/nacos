@@ -22,42 +22,41 @@ package com.alibaba.nacos.client.utils;
  */
 public class TenantUtil {
 
-    private static String userTenant;
+  private static String userTenant;
 
-    static {
-        userTenant = System.getProperty("tenant.id", "");
+  static {
+    userTenant = System.getProperty("tenant.id", "");
+  }
+
+  /**
+   * Adapt the way ACM gets tenant on the cloud.
+   *
+   * <p>Note the difference between getting and getting ANS. Since the processing logic on the
+   * server side is different, the default value returns differently.
+   *
+   * @return
+   */
+  public static String getUserTenantForAcm() {
+    String tmp = userTenant;
+
+    if (org.apache.commons.lang3.StringUtils.isBlank(userTenant)) {
+      tmp = System.getProperty("acm.namespace", "");
     }
 
-    /**
-     * Adapt the way ACM gets tenant on the cloud.
-     * <p>
-     * Note the difference between getting and getting ANS.
-     * Since the processing logic on the server side is different, the default value returns differently.
-     * </p>
-     *
-     * @return
-     */
-    public static String getUserTenantForAcm() {
-        String tmp = userTenant;
+    return tmp;
+  }
 
-        if (StringUtils.isBlank(userTenant)) {
-            tmp = System.getProperty("acm.namespace", "");
-        }
+  /**
+   * Adapt the way ANS gets tenant on the cloud.
+   *
+   * @return
+   */
+  public static String getUserTenantForAns() {
+    String tmp = userTenant;
 
-        return tmp;
+    if (org.apache.commons.lang3.StringUtils.isBlank(userTenant)) {
+      tmp = System.getProperty("ans.namespace");
     }
-
-    /**
-     * Adapt the way ANS gets tenant on the cloud.
-     *
-     * @return
-     */
-    public static String getUserTenantForAns() {
-        String tmp = userTenant;
-
-        if (StringUtils.isBlank(userTenant)) {
-            tmp = System.getProperty("ans.namespace");
-        }
-        return tmp;
-    }
+    return tmp;
+  }
 }

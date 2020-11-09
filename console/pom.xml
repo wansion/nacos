@@ -16,9 +16,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.alibaba.nacos</groupId>
+        <groupId>cn.aghost</groupId>
         <artifactId>nacos-all</artifactId>
-        <version>1.2.1</version>
+        <version>1.2.1.aghost-fix.20201109</version>
     </parent>
     <artifactId>nacos-console</artifactId>
     <!--<packaging>war</packaging>-->
@@ -100,6 +100,18 @@
                 </excludes>
             </resource>
         </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <additionalOptions>
+                        <additionalOption>-Xdoclint:none</additionalOption>
+                    </additionalOptions>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <reporting>
@@ -119,6 +131,7 @@
                 <finalName>nacos-server</finalName>
                 <plugins>
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-jar-plugin</artifactId>
                         <configuration>
                             <archive>
