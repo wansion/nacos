@@ -46,6 +46,7 @@
                     </additionalOptions>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
