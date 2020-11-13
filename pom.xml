@@ -21,7 +21,7 @@
     <inceptionYear>2018</inceptionYear>
     <groupId>cn.aghost</groupId>
     <artifactId>nacos-all</artifactId>
-    <version>1.2.1.aghost-fix.20201109</version>
+    <version>1.2.1.aghost-fix.20201113</version>
     <packaging>pom</packaging>
 
     <name>Alibaba NACOS ${project.version}</name>
@@ -855,7 +855,7 @@
             <dependency>
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
-                <version>0.9.12</version>
+                <version>0.9.11</version>
             </dependency>
 
         </dependencies>
