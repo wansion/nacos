@@ -17,7 +17,7 @@ package com.alibaba.nacos.naming.core;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.nacos.common.utils.Md5Utils;
+import com.alibaba.nacos.common.utils.MD5Utils;
 import com.alibaba.nacos.naming.pojo.Record;
 import org.apache.commons.lang3.StringUtils;
 
@@ -34,56 +34,68 @@ import java.util.Map;
  */
 public class Instances implements Record {
 
-    private List<Instance> instanceList = new ArrayList<>();
+  private List<Instance> instanceList = new ArrayList<>();
 
-    public List<Instance> getInstanceList() {
-        return instanceList;
+  public List<Instance> getInstanceList() {
+    return instanceList;
+  }
+
+  public void setInstanceList(List<Instance> instanceList) {
+    this.instanceList = instanceList;
+  }
+
+  @Override
+  public String toString() {
+    return JSON.toJSONString(this);
+  }
+
+  @Override
+  @JSONField(serialize = false)
+  public String getChecksum() {
+
+    return recalculateChecksum();
+  }
+
+  private String recalculateChecksum() {
+    StringBuilder sb = new StringBuilder();
+    Collections.sort(instanceList);
+    for (Instance ip : instanceList) {
+      String string =
+          ip.getIp()
+              + ":"
+              + ip.getPort()
+              + "_"
+              + ip.getWeight()
+              + "_"
+              + ip.isHealthy()
+              + "_"
+              + ip.isEnabled()
+              + "_"
+              + ip.getClusterName()
+              + "_"
+              + convertMap2String(ip.getMetadata());
+      sb.append(string);
+      sb.append(",");
     }
 
-    public void setInstanceList(List<Instance> instanceList) {
-        this.instanceList = instanceList;
+    return MD5Utils.md5Hex(sb.toString(), "UTF-8");
+  }
+
+  public String convertMap2String(Map<String, String> map) {
+
+    if (map == null || map.isEmpty()) {
+      return StringUtils.EMPTY;
     }
 
-    @Override
-    public String toString() {
-        return JSON.toJSONString(this);
+    StringBuilder sb = new StringBuilder();
+    List<String> keys = new ArrayList<>(map.keySet());
+    Collections.sort(keys);
+    for (String key : keys) {
+      sb.append(key);
+      sb.append(":");
+      sb.append(map.get(key));
+      sb.append(",");
     }
-
-    @Override
-    @JSONField(serialize = false)
-    public String getChecksum() {
-
-        return recalculateChecksum();
-    }
-
-    private String recalculateChecksum() {
-        StringBuilder sb = new StringBuilder();
-        Collections.sort(instanceList);
-        for (Instance ip : instanceList) {
-            String string = ip.getIp() + ":" + ip.getPort() + "_" + ip.getWeight() + "_"
-                + ip.isHealthy() + "_" + ip.isEnabled() + "_" + ip.getClusterName() + "_" + convertMap2String(ip.getMetadata());
-            sb.append(string);
-            sb.append(",");
-        }
-
-        return Md5Utils.getMD5(sb.toString(), "UTF-8");
-    }
-
-    public String convertMap2String(Map<String, String> map) {
-
-        if (map == null || map.isEmpty()) {
-            return StringUtils.EMPTY;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        List<String> keys = new ArrayList<>(map.keySet());
-        Collections.sort(keys);
-        for (String key : keys) {
-            sb.append(key);
-            sb.append(":");
-            sb.append(map.get(key));
-            sb.append(",");
-        }
-        return sb.toString();
-    }
+    return sb.toString();
+  }
 }

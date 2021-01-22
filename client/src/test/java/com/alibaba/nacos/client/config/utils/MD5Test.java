@@ -15,6 +15,7 @@
  */
 package com.alibaba.nacos.client.config.utils;
 
+import com.alibaba.nacos.common.utils.MD5Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
